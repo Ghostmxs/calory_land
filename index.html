@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Калория — счётчик калорий и дневник питания в Telegram</title>
+  <meta name="description" content="«Калория» — счётчик калорий в Telegram. Сфотографируйте блюдо — бот посчитает калории, белки, жиры и углеводы и сам ведёт дневник питания.">
+  <meta name="theme-color" content="#F5F1E8">
+  <link rel="canonical" href="https://ru.calorybot.org/">
+  <script>document.documentElement.classList.add('js');</script>
+
+  <!-- Favicons -->
+  <link rel="icon" href="/favicon.ico?v=2" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png?v=2">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Калория — счётчик калорий в Telegram">
+  <meta property="og:description" content="Сфотографируйте блюдо — бот посчитает КБЖУ и сам ведёт дневник питания прямо в Telegram.">
+  <meta property="og:url" content="https://ru.calorybot.org/">
+  <meta property="og:image" content="https://ru.calorybot.org/icon-512.png">
+  <meta property="og:locale" content="ru_RU">
+
+  <link rel="stylesheet" href="/assets/css/styles.css">
+  <script src="/assets/js/config.js"></script>
+  <script src="/assets/js/main.js" defer></script>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="site-header" id="top">
+    <div class="container nav">
+      <a class="brand" href="#top" aria-label="Калория — на главную">
+        <img class="brand-mark" src="/assets/img/logo.png?v=2" alt="" width="32" height="32">
+        Калория
+      </a>
+      <nav class="nav-links" aria-label="Основная навигация">
+        <a href="#how">Как это работает</a>
+        <a href="#features">Возможности</a>
+        <a href="#pricing">Тарифы</a>
+        <a href="#faq">Вопросы</a>
+      </nav>
+      <a class="btn btn-tg nav-cta" data-cta="bot" href="https://t.me/your_bot">
+        <img class="tg-logo" src="/assets/img/telegram.svg" alt="">
+        Открыть в Telegram
+      </a>
+      <button class="nav-toggle" type="button" aria-label="Меню" aria-expanded="false">
+        <svg class="ic" aria-hidden="true"><use href="/assets/img/icons.svg#i-menu"></use></svg>
+      </button>
+    </div>
+    <div class="container mobile-menu" id="mobileMenu">
+      <a href="#how">Как это работает</a>
+      <a href="#features">Возможности</a>
+      <a href="#pricing">Тарифы</a>
+      <a href="#faq">Вопросы</a>
+      <a class="btn btn-tg" data-cta="bot" href="https://t.me/your_bot">
+        <img class="tg-logo" src="/assets/img/telegram.svg" alt=""> Открыть в Telegram
+      </a>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero -->
+    <section class="hero">
+      <span class="blob" style="width:420px;height:420px;background:#E8EFD6;top:-120px;left:-140px;"></span>
+      <span class="blob" style="width:320px;height:320px;background:#EFE6D2;bottom:-120px;right:-100px;"></span>
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <span class="kicker">Счётчик калорий в Telegram</span>
+          <h1 class="h-display">Фотографируете еду — <span class="accent">видите&nbsp;КБЖУ</span></h1>
+          <p class="lead hero-lead">«Калория» считает калории, белки, жиры и углеводы по фотографии блюда и сама ведёт дневник питания. Без отдельных приложений и ручных таблиц.</p>
+          <div class="hero-actions">
+            <a class="btn btn-tg btn-lg" data-cta="bot" href="https://t.me/your_bot">
+              <img class="tg-logo" src="/assets/img/telegram.svg" alt="">
+              Открыть в Telegram
+            </a>
+            <a class="btn btn-ghost btn-lg" href="#how">Как это работает</a>
+          </div>
+          <ul class="hero-trust">
+            <li><svg class="ic" aria-hidden="true"><use href="/assets/img/icons.svg#i-message-circle"></use></svg> Работает в Telegram, без установки</li>
+            <li><svg class="ic" aria-hidden="true"><use href="/assets/img/icons.svg#i-camera"></use></svg> Распознаёт фото и текст</li>
+            <li><svg class="ic" aria-hidden="true"><use href="/assets/img/icons.svg#i-target"></use></svg> Цели по КБЖУ и прогресс</li>
+          </ul>
+        </div>
+
+        <div class="hero-art" aria-hidden="true">
+          <div class="hero-plate float">
+            <svg class="ic"><use href="/assets/img/icons.svg#i-salad"></use></svg>
+          </div>
+          <div class="hero-chip chip-a float-2" style="--rot:-3deg;">
+            <span class="tile tile-green"><svg class="ic"><use href="/assets/img/icons.svg#i-flame"></use></svg></span>
+            <span><b>Калории</b><small>и БЖУ за приём</small></span>
+          </div>
+          <div class="hero-chip chip-b float-3" style="--rot:2deg;">
+            <span class="tile tile-cream"><svg class="ic"><use href="/assets/img/icons.svg#i-camera"></use></svg></span>
+            <span><b>Фото блюда</b><small>распознаём состав</small></span>
+          </div>
+          <div class="hero-chip chip-c float" style="--rot:4deg;">
+            <span class="tile tile-green"><svg class="ic"><use href="/assets/img/icons.svg#i-chart-line"></use></svg></span>
+            <span><b>Прогресс</b><small>по дням и неделям</small></span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- How it works -->
+    <section class="section" id="how">
+      <div class="container">
+        <div class="section-head" data-reveal>
+          <span class="kicker">Как это работает</span>
+          <h2 class="h-section">Три шага — и дневник ведётся сам</h2>
+          <p class="lead">Не нужно искать продукты в каталогах и заполнять таблицы. Достаточно отправить сообщение боту.</p>
+        </div>
+        <div class="steps">
+          <article class="step" data-reveal>
+            <div class="step-icon"><svg class="ic"><use href="/assets/img/icons.svg#i-camera"></use></svg></div>
+            <h3>Отправьте фото</h3>
+            <p>Сфотографируйте блюдо или опишите его текстом прямо в чате с ботом.</p>
+          </article>
+          <article class="step" data-reveal>
+            <div class="step-icon"><svg class="ic"><use href="/assets/img/icons.svg#i-sparkles"></use></svg></div>
+            <h3>Бот распознаёт</h3>
+            <p>«Калория» определяет блюдо и считает калории, белки, жиры и углеводы.</p>
+          </article>
+          <article class="step" data-reveal>
+            <div class="step-icon"><svg class="ic"><use href="/assets/img/icons.svg#i-chart-line"></use></svg></div>
+            <h3>Следите за прогрессом</h3>
+            <p>Дневник, цели и сводки по дням и неделям собираются автоматически.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features -->
+    <section class="section" id="features">
+      <div class="container">
+        <div class="section-head" data-reveal>
+          <span class="kicker">Возможности</span>
+          <h2 class="h-section">Всё для учёта питания — в одном чате</h2>
+        </div>
+        <div class="bento">
+          <article class="feature feature--lead" data-reveal>
+            <div class="feature-tile tile-green"><svg class="ic"><use href="/assets/img/icons.svg#i-camera"></use></svg></div>
+            <h3>Распознавание по фотографии</h3>
+            <p>Сфотографируйте тарелку — бот определит состав и посчитает КБЖУ. Не нужно вручную искать каждый продукт в каталогах.</p>
+          </article>
+          <article class="feature" data-reveal>
+            <div class="feature-tile tile-cream"><svg class="ic"><use href="/assets/img/icons.svg#i-notebook-pen"></use></svg></div>
+            <h3>Дневник питания</h3>
+            <p>Каждый приём пищи сохраняется автоматически, с историей по дням.</p>
+          </article>
+          <article class="feature" data-reveal>
+            <div class="feature-tile tile-green"><svg class="ic"><use href="/assets/img/icons.svg#i-target"></use></svg></div>
+            <h3>Личные цели</h3>
+            <p>Норма калорий и БЖУ под вашу задачу: снижение, набор или поддержание веса.</p>
+          </article>
+          <article class="feature" data-reveal>
+            <div class="feature-tile tile-cream"><svg class="ic"><use href="/assets/img/icons.svg#i-trending-up"></use></svg></div>
+            <h3>Прогресс и сводки</h3>
+            <p>Понятные итоги за день и неделю, чтобы видеть динамику без лишних цифр.</p>
+          </article>
+          <article class="feature feature--wide" data-reveal>
+            <div class="feature-tile tile-green"><svg class="ic"><use href="/assets/img/icons.svg#i-bell"></use></svg></div>
+            <h3>Напоминания</h3>
+            <p>Мягкие напоминания внести приём пищи, чтобы дневник не оставался пустым.</p>
+          </article>
+          <article class="feature feature--wide" data-reveal>
+            <div class="feature-tile tile-cream"><svg class="ic"><use href="/assets/img/icons.svg#i-message-circle"></use></svg></div>
+            <h3>Всё в Telegram</h3>
+            <p>Никаких новых приложений и регистраций — пользуйтесь там, где уже общаетесь.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Pricing -->
+    <section class="section" id="pricing">
+      <div class="container">
+        <div class="section-head" data-reveal>
+          <span class="kicker">Тарифы</span>
+          <h2 class="h-section">Простая подписка без сюрпризов</h2>
+          <p class="lead">Выберите подходящий тариф. Подписка продлевается автоматически — отменить можно в любой момент.</p>
+        </div>
+        <div class="pricing-grid" id="pricingGrid" data-reveal></div>
+        <div class="billing-note" data-reveal>
+          <svg class="ic" aria-hidden="true"><use href="/assets/img/icons.svg#i-repeat"></use></svg>
+          <p id="billingNote"></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section" id="faq">
+      <div class="container">
+        <div class="section-head" data-reveal>
+          <span class="kicker">Вопросы</span>
+          <h2 class="h-section">Частые вопросы</h2>
+        </div>
+        <div class="faq">
+          <details class="qa" data-reveal>
+            <summary>Что такое «Калория»? <span class="qa-mark"><svg class="ic"><use href="/assets/img/icons.svg#i-check"></use></svg></span></summary>
+            <div class="qa-body">Это счётчик калорий в виде Telegram-бота. Вы отправляете фотографию или описание блюда, а бот считает калории и БЖУ и ведёт за вас дневник питания.</div>
+          </details>
+          <details class="qa" data-reveal>
+            <summary>Нужно ли устанавливать приложение? <span class="qa-mark"><svg class="ic"><use href="/assets/img/icons.svg#i-check"></use></svg></span></summary>
+            <div class="qa-body">Нет. «Калория» работает прямо в Telegram — отдельное приложение и регистрация не нужны.</div>
+          </details>
+          <details class="qa" data-reveal>
+            <summary>Сколько стоит и как оплатить? <span class="qa-mark"><svg class="ic"><use href="/assets/img/icons.svg#i-check"></use></svg></span></summary>
+            <div class="qa-body">Доступ к сервису оформляется по подписке — на неделю, месяц или год. Актуальные тарифы указаны в разделе «Тарифы», оплата проходит в Telegram.</div>
+          </details>
+          <details class="qa" data-reveal>
+            <summary>Как отменить подписку? <span class="qa-mark"><svg class="ic"><use href="/assets/img/icons.svg#i-check"></use></svg></span></summary>
+            <div class="qa-body">Отправьте боту команду <code data-cancel-cmd>/unsub</code> — автопродление отключится, повторных списаний не будет. Сделать это можно в любой момент.</div>
+          </details>
+          <details class="qa" data-reveal>
+            <summary>Как работает автопродление? <span class="qa-mark"><svg class="ic"><use href="/assets/img/icons.svg#i-check"></use></svg></span></summary>
+            <div class="qa-body">После окончания оплаченного периода подписка продлевается автоматически, а оплата списывается в начале нового периода. Если отключить автопродление командой <code data-cancel-cmd>/unsub</code>, доступ сохранится до конца уже оплаченного срока.</div>
+          </details>
+          <details class="qa" data-reveal>
+            <summary>Что происходит с моими данными? <span class="qa-mark"><svg class="ic"><use href="/assets/img/icons.svg#i-check"></use></svg></span></summary>
+            <div class="qa-body">Мы обрабатываем данные только в объёме, необходимом для работы сервиса. Подробности — в <a data-link="privacy" href="/privacy/">политике конфиденциальности</a>.</div>
+          </details>
+          <details class="qa" data-reveal>
+            <summary>«Калория» — это медицинский сервис? <span class="qa-mark"><svg class="ic"><use href="/assets/img/icons.svg#i-check"></use></svg></span></summary>
+            <div class="qa-body">Нет. Сервис носит информационно-справочный характер и не заменяет консультацию врача или диетолога.</div>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="section">
+      <div class="container">
+        <div class="cta-band" data-reveal>
+          <span class="cta-blob" style="width:360px;height:360px;top:-140px;left:-80px;"></span>
+          <span class="cta-blob" style="width:280px;height:280px;bottom:-120px;right:-60px;"></span>
+          <h2>Начните вести дневник питания сегодня</h2>
+          <p>Подключите «Калорию» в Telegram и держите питание под контролем — без приложений и таблиц.</p>
+          <a class="btn btn-ghost btn-lg" data-cta="bot" href="https://t.me/your_bot">
+            <img class="tg-logo" src="/assets/img/telegram.svg" alt="">
+            Открыть в Telegram
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a class="brand" href="#top">
+            <img class="brand-mark" src="/assets/img/logo.png?v=2" alt="" width="32" height="32">
+            Калория
+          </a>
+          <p>Счётчик калорий и дневник питания, который живёт в вашем Telegram.</p>
+          <a class="btn btn-tg" data-cta="bot" href="https://t.me/your_bot">
+            <img class="tg-logo" src="/assets/img/telegram.svg" alt=""> Открыть в Telegram
+          </a>
+        </div>
+        <div class="footer-col">
+          <h4>Разделы</h4>
+          <ul>
+            <li><a href="#how">Как это работает</a></li>
+            <li><a href="#features">Возможности</a></li>
+            <li><a href="#pricing">Тарифы</a></li>
+            <li><a href="#faq">Вопросы</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Документы</h4>
+          <ul>
+            <li><a data-link="privacy" href="/privacy/">Политика конфиденциальности</a></li>
+            <li><a data-link="terms" href="/terms/">Пользовательское соглашение</a></li>
+            <li><a data-link="cancel" href="/cancel/">Отмена подписки</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Поддержка</h4>
+          <ul>
+            <li><a data-email href="mailto:support@calorybot.org"><svg class="ic" aria-hidden="true"><use href="/assets/img/icons.svg#i-mail"></use></svg><span>support@calorybot.org</span></a></li>
+            <li><a data-cta="support" href="https://t.me/your_support"><svg class="ic" aria-hidden="true"><use href="/assets/img/icons.svg#i-message-circle"></use></svg>Поддержка в Telegram</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span class="legal-line">© <span data-year>2026</span> «Калория». Все права защищены. · <span data-legal>ИП Ханин Кирилл Русланович · ИНН 611904153140 · ОГРНИП 325619600062361</span></span>
+        <a class="to-top" href="#top">Наверх <svg class="ic" aria-hidden="true"><use href="/assets/img/icons.svg#i-arrow-up"></use></svg></a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
