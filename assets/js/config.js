@@ -9,7 +9,7 @@ window.CALORIYA = {
   TELEGRAM_SUPPORT_URL: 'https://t.me/CalorysSupportBot', // support bot
 
   // === Contacts & documents ===
-  SUPPORT_EMAIL: 'support@calorybot.org',
+  SUPPORT_EMAIL: 'support@calorybot.ru',
   LINK_PRIVACY: '/privacy/',                           // served from /privacy/index.html
   LINK_TERMS: '/terms/',                               // served from /terms/index.html
   LINK_CANCEL: '/cancel/',                             // served from /cancel/index.html
