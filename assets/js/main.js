@@ -73,6 +73,14 @@
     }).join('');
   }
 
+  // --- Legal wording bound to pricing tiers (offer text) ---
+  document.querySelectorAll('[data-plan]').forEach(function (el) {
+    var p = (C.PRICING || []).find(function (x) { return x.id === el.getAttribute('data-plan'); });
+    if (!p) return;
+    var f = el.getAttribute('data-field');
+    if (p[f] != null) el.textContent = p[f];
+  });
+
   // --- Billing disclosure ---
   var note = document.getElementById('billingNote');
   if (note && C.BILLING_NOTE) {

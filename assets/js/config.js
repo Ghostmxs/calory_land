@@ -32,10 +32,16 @@ window.CALORIYA = {
   // === Pricing tiers (array order = order on the page) ===
   // The UI is data-driven: add/remove/reorder items freely, layout adapts.
   // `days` powers the "≈ N ₽/день" line (shown for non-trial tiers).
+  // `legalDuration`/`legalPrice` carry the spelled-out wording reused verbatim
+  // in the offer (terms); kept as strings since Russian number-to-words is locale-heavy.
   PRICING: [
-    { id: 'trial', title: 'Пробный период', duration: '72 часа', days: 3,   price: 1,    caption: 'затем автопродление', badge: 'Старт', featured: true },
-    { id: 'week',  title: 'Неделя',         duration: '7 дней',   days: 7,   price: 299 },
-    { id: 'month', title: 'Месяц',          duration: '30 дней',  days: 30,  price: 749,  badge: 'Популярный' },
-    { id: 'year',  title: 'Год',            duration: '365 дней', days: 365, price: 2990, badge: 'Выгодно' },
+    { id: 'trial', title: 'Пробный период', duration: '3 дня',    days: 3,   price: 12,   caption: 'затем автопродление', badge: 'Старт', featured: true,
+      legalDuration: '3 (три) дня',                       legalPrice: '12 (двенадцать) рублей' },
+    { id: 'week',  title: 'Неделя',         duration: '7 дней',   days: 7,   price: 299,
+      legalDuration: '7 (семь) дней',                     legalPrice: '299 (двести девяносто девять) рублей' },
+    { id: 'month', title: 'Месяц',          duration: '30 дней',  days: 30,  price: 990,  badge: 'Популярный',
+      legalDuration: '30 (тридцать) дней',                legalPrice: '990 (девятьсот девяносто) рублей' },
+    { id: 'year',  title: 'Год',            duration: '365 дней', days: 365, price: 2990, badge: 'Выгодно',
+      legalDuration: '365 (триста шестьдесят пять) дней', legalPrice: '2 990 (две тысячи девятьсот девяносто) рублей' },
   ],
 };
