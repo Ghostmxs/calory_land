@@ -5,7 +5,7 @@
  */
 window.CALORIYA = {
   // === Telegram links ===
-  TELEGRAM_BOT_URL: 'https://t.me/Calorysbot',          // bot / mini-app entry point
+  TELEGRAM_BOT_URL: 'https://t.me/CaloryzBot',          // bot / mini-app entry point
   TELEGRAM_SUPPORT_URL: 'https://t.me/CalorysSupportBot', // support bot
 
   // === Contacts & documents ===
