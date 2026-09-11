@@ -13,6 +13,10 @@ window.CALORIYA = {
   LINK_PRIVACY: '/privacy/',                           // served from /privacy/index.html
   LINK_TERMS: '/terms/',                               // served from /terms/index.html
   LINK_CANCEL: '/cancel/',                             // served from /cancel/index.html
+  // Личный кабинет веб-плательщика: у него нет Telegram, и отмена в один тап
+  // живёт там. Без этой ссылки страница отмены обещала бы ему способ, которым
+  // он физически не может воспользоваться.
+  LINK_ACCOUNT: 'https://my.calorybot.ru/account',
 
   // === Legal entity (also reused in legal documents) ===
   LEGAL_ENTITY: 'ИП Ханин Кирилл Русланович',
@@ -34,13 +38,22 @@ window.CALORIYA = {
   // `days` powers the "≈ N ₽/день" line (shown for non-trial tiers).
   // `legalDuration`/`legalPrice` carry the spelled-out wording reused verbatim
   // in the offer (terms); kept as strings since Russian number-to-words is locale-heavy.
+  //
+  // ВАЖНО: эти значения обязаны совпадать с прод-настройками биллинга
+  // (calorybot: PRICE_*/​*_PERIOD_DAYS, calorybot_billing: PLANS). Расхождение
+  // здесь — это не опечатка на лендинге, а недостоверные сведения в оферте,
+  // которую плательщик принимает галочкой перед оплатой, то есть готовый повод
+  // для чарджбэка. 2026-09-12 так и было: «Неделя» стояла 299 против 399, а
+  // «Месяц» — 30 дней против фактических 14. Тариф называется «2 недели»
+  // именно поэтому: период 14 дней, и слово «месяц» в клиентском тексте было бы
+  // неправдой.
   PRICING: [
     { id: 'trial', title: 'Пробный период', duration: '3 дня',    days: 3,   price: 12,   caption: 'затем автопродление', badge: 'Старт', featured: true,
       legalDuration: '3 (три) дня',                       legalPrice: '12 (двенадцать) рублей' },
-    { id: 'week',  title: 'Неделя',         duration: '7 дней',   days: 7,   price: 299,
-      legalDuration: '7 (семь) дней',                     legalPrice: '299 (двести девяносто девять) рублей' },
-    { id: 'month', title: 'Месяц',          duration: '30 дней',  days: 30,  price: 990,  badge: 'Популярный',
-      legalDuration: '30 (тридцать) дней',                legalPrice: '990 (девятьсот девяносто) рублей' },
+    { id: 'week',  title: 'Неделя',         duration: '7 дней',   days: 7,   price: 399,
+      legalDuration: '7 (семь) дней',                     legalPrice: '399 (триста девяносто девять) рублей' },
+    { id: 'month', title: '2 недели',       duration: '14 дней',  days: 14,  price: 990,  badge: 'Популярный',
+      legalDuration: '14 (четырнадцать) дней',            legalPrice: '990 (девятьсот девяносто) рублей' },
     { id: 'year',  title: 'Год',            duration: '365 дней', days: 365, price: 2990, badge: 'Выгодно',
       legalDuration: '365 (триста шестьдесят пять) дней', legalPrice: '2 990 (две тысячи девятьсот девяносто) рублей' },
   ],
