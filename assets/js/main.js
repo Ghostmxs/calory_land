@@ -23,6 +23,7 @@
   setHref('[data-link="privacy"]', C.LINK_PRIVACY);
   setHref('[data-link="terms"]', C.LINK_TERMS);
   setHref('[data-link="cancel"]', C.LINK_CANCEL);
+  setHref('[data-link="account"]', C.LINK_ACCOUNT);
 
   // --- Support email ---
   if (C.SUPPORT_EMAIL) {
