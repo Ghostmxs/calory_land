@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Публичная оферта — Калория</title>
   <meta name="description" content="Публичная оферта о предоставлении доступа к сервису «Калория».">
-  <meta name="theme-color" content="#F5F1E8">
+  <meta name="theme-color" content="#FAF8F3">
   <meta name="robots" content="noindex">
   <script>document.documentElement.classList.add('js');</script>
 
@@ -14,6 +14,7 @@
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
   <link rel="manifest" href="/site.webmanifest">
 
+  <link rel="stylesheet" href="/assets/fonts/fonts.css">
   <link rel="stylesheet" href="/assets/css/styles.css">
   <script src="/assets/js/config.js"></script>
   <script src="/assets/js/main.js" defer></script>
@@ -23,25 +24,48 @@
   <header class="site-header" id="top">
     <div class="container nav">
       <a class="brand" href="/" aria-label="Калория — на главную">
-        <img class="brand-mark" src="/assets/img/logo.png?v=2" alt="" width="32" height="32">
+        <img class="brand-mark" src="/assets/img/logo.webp" alt="" width="32" height="32">
         Калория
       </a>
       <nav class="nav-links" aria-label="Основная навигация">
-        <a href="/index.html#how">Как это работает</a>
-        <a href="/index.html#features">Возможности</a>
-        <a href="/index.html#pricing">Тарифы</a>
-        <a href="/index.html#faq">Вопросы</a>
+        <a href="/#platform">Где работает</a>
+        <a href="/#features">Возможности</a>
+        <a href="/#how">Как это работает</a>
+        <a href="/#pricing">Тарифы</a>
+        <a href="/#faq">Вопросы</a>
       </nav>
-      <a class="btn btn-tg nav-cta" data-cta="bot" href="https://t.me/your_bot">
-        <img class="tg-logo" src="/assets/img/telegram.svg" alt="">
-        Открыть в Telegram
-      </a>
+      <div class="nav-actions">
+        <a class="btn btn-ghost" data-cta="login" href="https://my.calorybot.ru/auth">Войти</a>
+        <a class="btn" data-cta="start" href="https://my.calorybot.ru/">Попробовать</a>
+      </div>
+      <button class="nav-toggle" type="button" aria-label="Меню" aria-expanded="false" aria-controls="mobileMenu">
+        <svg class="ic" aria-hidden="true"><use href="/assets/img/icons.svg#i-menu"></use></svg>
+      </button>
+    </div>
+    <div class="container mobile-menu" id="mobileMenu">
+      <nav aria-label="Мобильная навигация">
+        <a href="/#platform">Где работает</a>
+        <a href="/#features">Возможности</a>
+        <a href="/#how">Как это работает</a>
+        <a href="/#pricing">Тарифы</a>
+        <a href="/#faq">Вопросы</a>
+      </nav>
+      <div class="menu-cta">
+        <a class="btn" data-cta="start" href="https://my.calorybot.ru/">Попробовать за 12 ₽</a>
+        <a class="btn btn-light" data-cta="login" href="https://my.calorybot.ru/auth">
+          <svg class="ic" aria-hidden="true"><use href="/assets/img/icons.svg#i-log-in"></use></svg>
+          Войти в аккаунт
+        </a>
+      </div>
     </div>
   </header>
 
   <main class="container doc">
     <div class="doc-head">
-      <a class="kicker" href="/" style="margin-bottom:18px;">← На главную</a>
+      <a class="doc-back" href="/">
+        <svg class="ic" aria-hidden="true"><use href="/assets/img/icons.svg#i-arrow-right"></use></svg>
+        На главную
+      </a>
       <h1>Публичная оферта о предоставлении доступа к сервису «Калория»</h1>
       <p class="doc-meta">Редакция от 24 июня 2026 г.</p>
     </div>
@@ -241,39 +265,68 @@
       <div class="footer-top">
         <div class="footer-brand">
           <a class="brand" href="/">
-            <img class="brand-mark" src="/assets/img/logo.png?v=2" alt="" width="32" height="32">
+            <img class="brand-mark" src="/assets/img/logo.webp" alt="" width="32" height="32">
             Калория
           </a>
-          <p>Счётчик калорий и дневник питания, который живёт в вашем Telegram.</p>
+          <p>Счётчик калорий и дневник питания, который считает КБЖУ по фотографии блюда.</p>
+          <a class="btn btn-lime" data-cta="start" href="https://my.calorybot.ru/">Попробовать за 12 ₽</a>
         </div>
+
         <div class="footer-col">
-          <h4>Разделы</h4>
+          <h4>Продукт</h4>
           <ul>
-            <li><a href="/index.html#how">Как это работает</a></li>
-            <li><a href="/index.html#features">Возможности</a></li>
-            <li><a href="/index.html#pricing">Тарифы</a></li>
-            <li><a href="/index.html#faq">Вопросы</a></li>
+            <li><a href="/#platform">Где работает</a></li>
+            <li><a href="/#features">Возможности</a></li>
+            <li><a href="/#how">Как это работает</a></li>
+            <li><a href="/#pricing">Тарифы</a></li>
+            <li><a href="/#faq">Вопросы</a></li>
           </ul>
         </div>
+
         <div class="footer-col">
-          <h4>Документы</h4>
+          <h4>Аккаунт</h4>
+          <ul>
+            <li><a data-cta="start" href="https://my.calorybot.ru/">Создать аккаунт</a></li>
+            <li><a data-cta="login" href="https://my.calorybot.ru/auth">Войти</a></li>
+            <li><a data-cta="app" href="https://my.calorybot.ru/app">Дневник в браузере</a></li>
+            <li><a data-link="account" href="https://my.calorybot.ru/account">Личный кабинет</a></li>
+            <li><a data-cta="bot" href="https://t.me/CaloryzBot">Бот в Telegram</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Документы и поддержка</h4>
           <ul>
             <li><a data-link="privacy" href="/privacy/">Политика конфиденциальности</a></li>
             <li><a data-link="terms" href="/terms/">Пользовательское соглашение</a></li>
             <li><a data-link="cancel" href="/cancel/">Отмена подписки</a></li>
-          </ul>
-        </div>
-        <div class="footer-col">
-          <h4>Поддержка</h4>
-          <ul>
-            <li><a data-email href="mailto:support@calorybot.ru"><svg class="ic" aria-hidden="true"><use href="/assets/img/icons.svg#i-mail"></use></svg><span>support@calorybot.ru</span></a></li>
-            <li><a data-cta="support" href="https://t.me/your_support"><svg class="ic" aria-hidden="true"><use href="/assets/img/icons.svg#i-message-circle"></use></svg>Поддержка в Telegram</a></li>
+            <li><a data-email href="mailto:support@calorybot.ru">
+              <svg class="ic" aria-hidden="true"><use href="/assets/img/icons.svg#i-mail"></use></svg>
+              <span>support@calorybot.ru</span>
+            </a></li>
+            <li><a data-cta="support" href="https://t.me/CalorysSupportBot">
+              <svg class="ic" aria-hidden="true"><use href="/assets/img/icons.svg#i-message-circle"></use></svg>
+              Поддержка в Telegram
+            </a></li>
           </ul>
         </div>
       </div>
+
       <div class="footer-bottom">
-        <span class="legal-line">© <span data-year>2026</span> «Калория». Все права защищены. · <span data-legal>ИП Ханин Кирилл Русланович · ИНН 611904153140 · ОГРНИП 325619600062361</span></span>
-        <a class="to-top" href="#top">Наверх <svg class="ic" aria-hidden="true"><use href="/assets/img/icons.svg#i-arrow-up"></use></svg></a>
+        <div>
+          <span class="legal-line">
+            © <span data-year>2026</span> «Калория» ·
+            <span data-legal>ИП Ханин Кирилл Русланович · ИНН 611904153140 · ОГРНИП 325619600062361</span>
+          </span>
+          <p class="disclaimer">
+            Сервис носит информационно-справочный характер и не является медицинской услугой.
+            Расчёты не заменяют консультацию врача или диетолога.
+          </p>
+        </div>
+        <a class="to-top" href="#top">
+          Наверх
+          <svg class="ic" aria-hidden="true"><use href="/assets/img/icons.svg#i-arrow-up"></use></svg>
+        </a>
       </div>
     </div>
   </footer>

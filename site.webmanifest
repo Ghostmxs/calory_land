@@ -1,12 +1,12 @@
 {
   "name": "Калория",
   "short_name": "Калория",
-  "description": "Счётчик калорий и дневник питания в Telegram.",
+  "description": "Счётчик калорий и дневник питания: КБЖУ по фотографии блюда в Telegram и в браузере.",
   "lang": "ru",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#F5F1E8",
-  "theme_color": "#F5F1E8",
+  "background_color": "#FAF8F3",
+  "theme_color": "#FAF8F3",
   "icons": [
     { "src": "/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
     { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" }

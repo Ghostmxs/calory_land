@@ -3,3 +3,5 @@ Allow: /
 Disallow: /privacy/
 Disallow: /terms/
 Disallow: /cancel/
+
+Sitemap: https://calorybot.ru/sitemap.xml

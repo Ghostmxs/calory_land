@@ -1,22 +1,39 @@
 /**
  * Калория — single source of truth for all editable values.
  * Change links, contacts, legal details and pricing here only.
- * main.js binds these into the DOM at runtime ([data-bind], [data-href], pricing grid).
+ * main.js binds these into the DOM at runtime ([data-cta], [data-link], pricing grid).
  */
 window.CALORIYA = {
-  // === Telegram links ===
-  TELEGRAM_BOT_URL: 'https://t.me/CaloryzBot',          // bot / mini-app entry point
-  TELEGRAM_SUPPORT_URL: 'https://t.me/CalorysSupportBot', // support bot
+  // === Точки входа в продукт ==================================================
+  // «Калория» — платформа с несколькими входами в один и тот же аккаунт, а не
+  // один бот. Порядок здесь = приоритет воронки: главный CTA лендинга ведёт на
+  // веб-квиз, потому что платный трафик (Яндекс.Директ) обязан оставаться на
+  // нашем домене — иначе конверсия и цели Метрики считаются в Telegram, где их
+  // не видно.
+  LINK_START: 'https://my.calorybot.ru/',        // квиз-регистрация (главный CTA)
+  LINK_LOGIN: 'https://my.calorybot.ru/auth',    // вход для тех, кто уже зарегистрирован
+  LINK_APP: 'https://my.calorybot.ru/app',       // дневник в браузере
+  LINK_ACCOUNT: 'https://my.calorybot.ru/account', // личный кабинет: отмена подписки в один тап
+  TELEGRAM_BOT_URL: 'https://t.me/CaloryzBot',   // бот / Mini App
+  TELEGRAM_SUPPORT_URL: 'https://t.me/CalorysSupportBot',
+
+  // Каналы, которых ещё нет. Пустая ссылка = плитка рендерится неактивной с
+  // бейджем «скоро»; как только появится адрес, достаточно вписать его сюда.
+  LINK_MAX: '',       // бот в мессенджере MAX
+  LINK_RUSTORE: '',   // приложение в RuStore
 
   // === Contacts & documents ===
   SUPPORT_EMAIL: 'support@calorybot.ru',
-  LINK_PRIVACY: '/privacy/',                           // served from /privacy/index.html
-  LINK_TERMS: '/terms/',                               // served from /terms/index.html
-  LINK_CANCEL: '/cancel/',                             // served from /cancel/index.html
-  // Личный кабинет веб-плательщика: у него нет Telegram, и отмена в один тап
-  // живёт там. Без этой ссылки страница отмены обещала бы ему способ, которым
-  // он физически не может воспользоваться.
-  LINK_ACCOUNT: 'https://my.calorybot.ru/account',
+  LINK_PRIVACY: '/privacy/',                     // served from /privacy/index.html
+  LINK_TERMS: '/terms/',                         // served from /terms/index.html
+  LINK_CANCEL: '/cancel/',                       // served from /cancel/index.html
+
+  // === Аналитика ==============================================================
+  // Политика конфиденциальности (§9.2) уже объявляет Яндекс Метрику, включая
+  // Вебвизор. Счётчик не зашит в разметку: без номера он бы висел мёртвым
+  // <script>, а с чужим номером — сливал бы данные не туда. Впишите номер —
+  // main.js подключит счётчик сам; оставьте null — счётчика на странице нет.
+  METRIKA_ID: null,
 
   // === Legal entity (also reused in legal documents) ===
   LEGAL_ENTITY: 'ИП Ханин Кирилл Русланович',
@@ -30,8 +47,8 @@ window.CALORIYA = {
   BILLING_NOTE:
     'Подписка продлевается автоматически: после окончания оплаченного периода доступ ' +
     'продлевается на следующий период по выбранному тарифу, а оплата списывается в начале ' +
-    'каждого нового периода. Отменить автопродление можно в любой момент — отправьте команду ' +
-    '/unsub боту в Telegram. Все цены указаны в рублях, скрытых платежей нет.',
+    'каждого нового периода. Отменить автопродление можно в любой момент — в личном кабинете ' +
+    'на сайте или командой /unsub боту в Telegram. Все цены указаны в рублях, скрытых платежей нет.',
 
   // === Pricing tiers (array order = order on the page) ===
   // The UI is data-driven: add/remove/reorder items freely, layout adapts.
