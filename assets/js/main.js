@@ -24,20 +24,90 @@
     each(sel, function (el) { el.setAttribute('href', url); });
   }
 
+  /* ── Метки рекламы: лендинг обязан их передать дальше ─────────────────────
+   * Клик из Директа приземляется здесь, а аккаунт рождается на my.calorybot.ru
+   * — на первом ответе квиза. Метки читает там `captureAttribution()`
+   * (@calorybot frontend/assets/api.js) из `location.search`, так что не
+   * передать их значит записать в таблицу `acquisition` пустоту: визит Метрика
+   * склеит (cookie одна на домен второго уровня), а вот какая кампания и какая
+   * фраза его привели — мы не узнаем. Ровно этого здесь и не было.
+   *
+   * Переносим только известные метки, а не весь query. Слепой перенос дал бы
+   * любому желающему складывать в нашу таблицу произвольные значения ссылкой,
+   * а заодно тащил бы на воронку мусор вроде `fbclid`.
+   *
+   * Список — те же имена, что читает воронка. Разойдётся — метка молча
+   * перестанет доезжать, поэтому имена держать одинаковыми.
+   */
+  var AD_MARKS = ['yclid', 'utm_source', 'utm_medium', 'utm_campaign', 'utm_content',
+    'utm_term', 'source', 'source_type', 'device_type', 'match_type',
+    'matched_keyword', 'gbid', 'ad_id'];
+
+  function adQuery() {
+    var from = new URLSearchParams(location.search);
+    var out = new URLSearchParams();
+    AD_MARKS.forEach(function (k) { if (from.get(k)) out.set(k, from.get(k)); });
+    var s = out.toString();
+    return s ? '?' + s : '';
+  }
+
+  /* Наши собственные адреса — им метки нужны. Ссылка в бота метки в query не
+   * принимает (Telegram их не передаёт боту), у неё свой механизм — ниже. */
+  function withMarks(url) {
+    if (!url) return url;
+    var marks = adQuery();
+    if (!marks) return url;
+    return url + (url.indexOf('?') >= 0 ? '&' + marks.slice(1) : marks);
+  }
+
+  /* ── Ссылка в бота: почему она несёт payload ──────────────────────────────
+   * Человек, ушедший в Telegram, для Директа невидим дважды: бот-ссылки на
+   * пейвол не несут `r=web`, поэтому счётчик их оплаты не видит вовсе, а у
+   * свежего бот-аккаунта нет ни ClientID, ни yclid, к которым можно привязать
+   * платёж. Поэтому ссылка отдаёт ClientID сама: `/start` кладёт его в
+   * `acquisition` бот-аккаунта (@calorybot handlers/commands.py), и оттуда уже
+   * работающий фид офлайн-конверсий сообщает Директу первый ребил этого
+   * человека как `rebill_1_ok`.
+   *
+   * ⚠️ Формат общий с @calorybot frontend/assets/lib.js (`botUrl`) и разбирается
+   * @calorybot web/attribution.py. Три места, сборки между ними нет — то же
+   * правило и та же цена ошибки, что у номера счётчика и у цен. Поэтому формат
+   * намеренно тупой.
+   *
+   * `ym-` с дефисом — несущая деталь: тот же аргумент `/start` уже занят
+   * партнёрскими ссылками (`<hashid>[_<tag>]`), а алфавит Hashids
+   * буквенно-цифровой и дефис в нём невозможен. Значит payload, начинающийся с
+   * `ym-`, партнёрским хэшем быть не может, и разбор их различает, а не угадывает.
+   */
+  function botUrl(base, clientID) {
+    if (!base) return base;
+    var parts = [];
+    if (clientID) parts.push('c' + clientID);
+    var yclid = new URLSearchParams(location.search).get('yclid');
+    if (yclid) parts.push('y' + yclid);
+    if (!parts.length) return base;
+    var payload = 'ym-' + parts.join('-');
+    return base + (base.indexOf('?') >= 0 ? '&' : '?') + 'start=' + encodeURIComponent(payload);
+  }
+
   /* ── Ссылки ───────────────────────────────────────────────────────────────
    * Точки входа адресуются через [data-cta], документы — через [data-link].
    * Разделение не косметическое: data-cta — это места, по которым считается
    * воронка, и именно их перечисляет блок целей Метрики ниже.
    */
-  setHref('[data-cta="start"]', C.LINK_START);
-  setHref('[data-cta="login"]', C.LINK_LOGIN);
-  setHref('[data-cta="app"]', C.LINK_APP);
-  setHref('[data-cta="bot"]', C.TELEGRAM_BOT_URL);
+  /* Метки на всех четырёх наших адресах, а не только на квизе. Аккаунт рождается
+   * только в квизе, но зайти по объявлению можно в любую из дверей, а запись
+   * атрибуции insert-only (первое касание побеждает) — так что лишняя метка не
+   * стоит ничего, а недостающая стоит потерянной кампании. */
+  setHref('[data-cta="start"]', withMarks(C.LINK_START));
+  setHref('[data-cta="login"]', withMarks(C.LINK_LOGIN));
+  setHref('[data-cta="app"]', withMarks(C.LINK_APP));
+  setHref('[data-cta="bot"]', botUrl(C.TELEGRAM_BOT_URL, null));
   setHref('[data-cta="support"]', C.TELEGRAM_SUPPORT_URL);
   setHref('[data-link="privacy"]', C.LINK_PRIVACY);
   setHref('[data-link="terms"]', C.LINK_TERMS);
   setHref('[data-link="cancel"]', C.LINK_CANCEL);
-  setHref('[data-link="account"]', C.LINK_ACCOUNT);
+  setHref('[data-link="account"]', withMarks(C.LINK_ACCOUNT));
 
   /* Каналы «скоро». Плитка размечена неактивной, и это состояние по умолчанию:
    * появился адрес в конфиге — плитка сама становится ссылкой. Обратный порядок
@@ -197,35 +267,71 @@
   }
 
   /* ── Яндекс Метрика ───────────────────────────────────────────────────────
-   * Счётчик подключается только при заданном METRIKA_ID. Политика
-   * конфиденциальности (§9.2) уже объявляет Метрику и Вебвизор, поэтому
-   * включение номера не требует правки документов — а отсутствие номера не
-   * оставляет на странице мёртвый сторонний <script>.
+   * Счётчик 112507894 — тот же, что на my.calorybot.ru и pay.calorybot.ru.
+   * Обоснование, почему один, а не три — в config.js рядом с номером.
    *
-   * `defer` у main.js означает, что мы уже после парсинга разметки: счётчик
-   * грузится, не задерживая первую отрисовку.
+   * Загрузчик — дословно тот, что генерирует сам кабинет счётчика: URL
+   * библиотеки с `?id=`, защита от повторной вставки, те же опции `init`. Своя
+   * версия — это вторая реализация того, что Яндекс меняет, не спрашивая нас;
+   * первая редакция этого файла как раз отличалась от эталона (не было `?id=` и
+   * не было защиты от дубля), и разошлась бы дальше.
+   *
+   * `<noscript>`-пиксель не ставим: из внешнего файла он невозможен — при
+   * выключенном JS этот код не выполняется вовсе.
    */
   if (C.METRIKA_ID) {
     (function (m, e, t, r, i, k, a) {
       m[i] = m[i] || function () { (m[i].a = m[i].a || []).push(arguments); };
       m[i].l = 1 * new Date();
-      k = e.createElement(t); a = e.getElementsByTagName(t)[0];
-      k.async = 1; k.src = r; a.parentNode.insertBefore(k, a);
-    })(window, document, 'script', 'https://mc.yandex.ru/metrika/tag.js', 'ym');
+      for (var j = 0; j < document.scripts.length; j++) { if (document.scripts[j].src === r) { return; } }
+      k = e.createElement(t), a = e.getElementsByTagName(t)[0], k.async = 1, k.src = r, a.parentNode.insertBefore(k, a);
+    })(window, document, 'script', 'https://mc.yandex.ru/metrika/tag.js?id=' + C.METRIKA_ID, 'ym');
 
     window.ym(C.METRIKA_ID, 'init', {
-      clickmap: true,
-      trackLinks: true,
-      accurateTrackBounce: true,
+      ssr: true,
       webvisor: true,
+      clickmap: true,
+      referrer: document.referrer,
+      url: location.href,
+      accurateTrackBounce: true,
+      trackLinks: true,
     });
 
-    // Цели воронки. Имя цели = значение data-cta, поэтому новая точка входа
-    // в разметке сразу попадает в отчёты без правки этого кода.
+    /* ── Цели ───────────────────────────────────────────────────────────────
+     * Ровно одна, и это исправление, а не урезание. Раньше здесь стояло
+     * `reachGoal('cta_' + data-cta)`, то есть имя цели собиралось из атрибута
+     * разметки: улетали `cta_start`, `cta_bot`, `cta_login`, `cta_app`,
+     * `cta_support` — и ни одна из них не была создана в Метрике. Незнакомый
+     * идентификатор Метрика принимает молча и никуда не записывает, так что
+     * весь блок был no-op, выглядящим как аналитика.
+     *
+     * `bot_click` (создана на счётчике, §10.2) — это выбор побочного канала:
+     * человек уходит в Telegram вместо веба. Только продуктовый бот; поддержка
+     * не считается — написать в поддержку не значит войти в продукт.
+     *
+     * Отдельной цели на переход в квиз нет намеренно. Теперь, когда лендинг и
+     * my.calorybot.ru в одном счётчике, шаг «лендинг → квиз» виден в отчёте по
+     * страницам бесплатно, а первое действие в квизе уже считает `quiz_start`.
+     * Цель на клик была бы третьей копией того же факта.
+     *
+     * Один раз за визит: бюджет при оплате за конверсии списывается за каждое
+     * достижение цели в визите, поэтому цель, которую можно нащёлкать, — это
+     * цель, за которую можно заплатить дважды.
+     */
+    var goalSent = false;
     document.addEventListener('click', function (e) {
-      var el = e.target.closest('[data-cta]');
-      if (!el) return;
-      window.ym(C.METRIKA_ID, 'reachGoal', 'cta_' + el.getAttribute('data-cta'));
+      var el = e.target.closest('[data-cta="bot"]');
+      if (!el || goalSent) return;
+      goalSent = true;
+      window.ym(C.METRIKA_ID, 'reachGoal', 'bot_click');
     }, { passive: true });
+
+    /* ClientID → ссылки в бота. Асинхронно, поэтому ссылки уже стоят без метки,
+     * а колбэк их дописывает: клик в первые ~200 мс потеряет метку, и это
+     * дешевле, чем задерживать разметку до ответа счётчика. Значение то же, что
+     * получит квиз — cookie одна на весь домен второго уровня. */
+    window.ym(C.METRIKA_ID, 'getClientID', function (clientID) {
+      setHref('[data-cta="bot"]', botUrl(C.TELEGRAM_BOT_URL, clientID));
+    });
   }
 })();
